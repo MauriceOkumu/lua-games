@@ -48,11 +48,19 @@ function love.draw()
          40,
         WINDOW_WIDTH,
     'center')
-    love.graphics.print('PLAYER-1 : sores - ' .. player1score, 260, 60)
-    love.graphics.print('PLAYER-2 : sores - ' .. player2score, WINDOW_WIDTH - 260, 60)
+    love.graphics.print('PLAYER-1 : scores - ' .. player1score, 260, 60)
+    love.graphics.print('PLAYER-2 : scores - ' .. player2score, WINDOW_WIDTH - 260, 60)
+
+    if gameState == 'start' then
+      love.graphics.print('PRESS \'enter\' OR \'return \' TO START OR \'esc\' TO QUIT', 400 , 640)
+    end
+    
+    if scoreState == 'goal' then
+        love.graphics.print('GOOAALLL!!', 560, 320)
+    end
 
     player1:render()
-   player2:render()
+    player2:render()
     ball:render()
     ttop:render()
     tbot:render()
@@ -134,7 +142,7 @@ function love.update(dt)
          ball:update(dt)
     end
     player1:update(dt)
-   player2:update(dt)
+    player2:update(dt)
     
 end
 
@@ -148,9 +156,10 @@ function love.keypressed(key)
     elseif key == 'enter' or key == 'return' then
         if gameState == 'start' then
             gameState = 'play'
+            scoreState = 'nil'
+
         else
             gameState = 'start'
-            
             ball:reset()
         end
     end
@@ -169,12 +178,14 @@ function scored()
     if ball.x > WINDOW_WIDTH - 40 then
         player1score = player1score + 1
         gameState = 'start'
+        scoreState = 'goal'
         ball:reset()
         sounds.score:play()
     end
     if ball.x < 40 then
         player2score = player2score + 1
         gameState = 'start'
+        scoreState = 'goal'
         ball:reset()
         sounds.score:play()
     end
