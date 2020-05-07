@@ -19,8 +19,12 @@ local g_scroll = 1280
 
 local BG_SPEED = 30
 local G_SPEED = 60
+
 local flappy = Bird()
 local pipe = Pipe()
+
+local pipes = {}
+local spawnTimer = 0
 
 local BG_LOOPING_POINT =  - 1200
 
@@ -48,6 +52,9 @@ function love.draw()
     -- love.graphics.draw(background, -bg_scroll, 0)
     -- love.graphics.draw(background, -bg_scroll-1100 + WINDOW_WIDTH / 2, 0)
     -- love.graphics.draw(ground, g_scroll+ WINDOW_WIDTH, 550)
+    for k, pipe in pairs(pipes) do
+        pipe:render()
+    end
     love.graphics.draw(ground, g_scroll , 550)
     love.graphics.draw(ground, g_scroll + 1200 , 550)
     -- flappy:render()
@@ -57,7 +64,7 @@ function love.draw()
      end
     -- push:finish()
     flappy:render()
-    pipe:render()
+    
 end
 
 function love.update(dt)
@@ -66,8 +73,22 @@ function love.update(dt)
     -- end
     -- bg_scroll = (bg_scroll + BG_SPEED * dt) % BG_LOOPING_POINT
     g_scroll =  (g_scroll - G_SPEED * dt) % BG_LOOPING_POINT
+    -- pipe:update(dt)
+    spawnTimer = spawnTimer + dt 
+    
+    if spawnTimer > 2 then 
+        table.insert(pipes, Pipe())
+        spawnTimer = 0
+    end
     flappy:update(dt)
-    pipe:update(dt)
+
+    for k, pipe in pairs(pipes) do 
+        pipe:update(dt)
+
+        if pipe.x < -pipe.width then
+            table.remove(pipes, k)
+        end
+    end
     -- flash out the keys pressed table after every frame
     love.keyboard.KeysPressed = {}
 end
