@@ -2,6 +2,7 @@
 require 'push'
 Class = require 'class'
 require 'Bird'
+require 'Pipe'
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
@@ -19,6 +20,7 @@ local g_scroll = 1280
 local BG_SPEED = 30
 local G_SPEED = 60
 local flappy = Bird()
+local pipe = Pipe()
 
 local BG_LOOPING_POINT =  - 1200
 
@@ -55,6 +57,7 @@ function love.draw()
      end
     -- push:finish()
     flappy:render()
+    pipe:render()
 end
 
 function love.update(dt)
@@ -64,7 +67,7 @@ function love.update(dt)
     -- bg_scroll = (bg_scroll + BG_SPEED * dt) % BG_LOOPING_POINT
     g_scroll =  (g_scroll - G_SPEED * dt) % BG_LOOPING_POINT
     flappy:update(dt)
-    
+    pipe:update(dt)
     -- flash out the keys pressed table after every frame
     love.keyboard.KeysPressed = {}
 end
