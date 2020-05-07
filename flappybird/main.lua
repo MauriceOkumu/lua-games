@@ -1,5 +1,7 @@
 
 require 'push'
+Class = require 'class'
+require 'Bird'
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
@@ -16,6 +18,7 @@ local g_scroll = 1280
 
 local BG_SPEED = 30
 local G_SPEED = 60
+local flappy = Bird()
 
 local BG_LOOPING_POINT =  - 1200
 
@@ -34,6 +37,7 @@ function love.load()
     })
     
     love.graphics.setFont(font)
+    love.keyboard.KeysPressed = {}
 end
 
 function love.draw()
@@ -44,11 +48,13 @@ function love.draw()
     -- love.graphics.draw(ground, g_scroll+ WINDOW_WIDTH, 550)
     love.graphics.draw(ground, g_scroll , 550)
     love.graphics.draw(ground, g_scroll + 1200 , 550)
-    love.graphics.print('Welcome to flappy bird', 500, 300)
+    -- flappy:render()
+    love.graphics.print('FLAPPY BIRD', 500, 30)
     if gametime == 'night' then 
         love.graphics.setColor(0, 255, 0, 255)
      end
     -- push:finish()
+    flappy:render()
 end
 
 function love.update(dt)
@@ -57,9 +63,26 @@ function love.update(dt)
     -- end
     -- bg_scroll = (bg_scroll + BG_SPEED * dt) % BG_LOOPING_POINT
     g_scroll =  (g_scroll - G_SPEED * dt) % BG_LOOPING_POINT
+    flappy:update(dt)
+    
+    -- flash out the keys pressed table after every frame
+    love.keyboard.KeysPressed = {}
 end
 
+function love.keyboard.wasPressed(key)
+    -- Query the keys pressed table
+    if  love.keyboard.KeysPressed[key] then
+        return true
+    else
+        return false
+    end
+end
+
+
 function love.keypressed(key)
+    -- Put the pressed keys in the table
+    love.keyboard.KeysPressed[key] = true
+
     if key == 'escape' then
         love.event.quit()
     end
