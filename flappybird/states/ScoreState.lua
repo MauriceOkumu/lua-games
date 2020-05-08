@@ -17,12 +17,11 @@ function ScoreState:update(dt)
 end
 
 function ScoreState:render()
-    -- simply render the score to the middle of the screen
-    -- love.graphics.setFont(flappyFont)
-    love.graphics.printf('Oof! You lost!', 0, 64, WINDOW_WIDTH, 'center')
 
-    -- love.graphics.setFont(mediumFont)
-    love.graphics.printf('Score: ' .. tostring(self.score), 0, 100, WINDOW_WIDTH, 'center')
+    love.graphics.printf({COLORS,'Oof! You lost!'}, 0, 64, WINDOW_WIDTH, 'center')
 
-    love.graphics.printf('Press Enter to Play Again!', 0, 160, WINDOW_WIDTH, 'center')
+    love.graphics.setFont(flappyFont)
+    love.graphics.printf({COLORS,'Score: ' .. tostring(self.score)}, 0, 100, WINDOW_WIDTH, 'center')
+
+    love.graphics.printf({{255, 0, 0, 1},'Press Enter to Play Again!'}, 0, 160, WINDOW_WIDTH, 'center')
 end

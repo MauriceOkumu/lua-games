@@ -17,6 +17,7 @@ require 'Pipe'
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
+COLORS = {0, 255, 0, 255}
 
 
 
@@ -39,7 +40,7 @@ local G_SPEED = 60
 
 local BG_LOOPING_POINT =  - 1200
 
-font = love.graphics.newFont(20)
+-- font = love.graphics.newFont(20)
 
 
 
@@ -47,13 +48,14 @@ function love.load()
     math.randomseed(os.time())
 
     love.window.setTitle('Flappy bird')
+    
 
     -- initialize our nice-looking retro text fonts
-    -- smallFont = love.graphics.newFont('font.ttf', 8)
-    -- mediumFont = love.graphics.newFont('flappy.ttf', 14)
-    -- flappyFont = love.graphics.newFont('flappy.ttf', 28)
-    -- hugeFont = love.graphics.newFont('flappy.ttf', 56)
-    -- love.graphics.setFont(flappyFont)
+    smallFont = love.graphics.newFont('fonts/font.ttf', 8)
+    mediumFont = love.graphics.newFont('fonts/flappy.ttf', 14)
+    flappyFont = love.graphics.newFont('fonts/flappy.ttf', 28)
+    hugeFont = love.graphics.newFont('fonts/flappy.ttf', 56)
+    love.graphics.setFont(flappyFont)
 
     -- initialize our table of sounds
     sound = {
@@ -83,7 +85,7 @@ function love.load()
         ['play'] = function() return PlayState() end,
         ['score'] = function() return ScoreState() end
     }
-    love.graphics.setFont(font)
+    -- love.graphics.setFont(font)
 
     -- Render the title on load
     gStateMachine:change('title')
@@ -102,7 +104,8 @@ function love.draw()
     --     pipe:render()
     -- end
     -- flappy:render()
-    love.graphics.print('FLAPPY BIRD', 500, 30)
+    -- love.graphics.print('FLAPPY BIRD', 500, 30)
+    love.graphics.printf({COLORS,'FLAPPY BIRD!'}, 0, 30, WINDOW_WIDTH, 'center')
     -- if gametime == 'night' then 
     --     love.graphics.setColor(0, 255, 0, 255)
     --  end

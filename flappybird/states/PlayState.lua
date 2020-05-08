@@ -24,11 +24,12 @@ function PlayState:init()
 end
 
 function PlayState:update(dt)
+    local num = (math.random(1, 10)) * 5 
     -- update timer for pipe spawning
     self.timer = self.timer + dt
 
     -- spawn a new pipe pair every second and a half
-    if self.timer > 4 then
+    if self.timer > num then
         -- modify the last Y coordinate we placed so pipe gaps aren't too far apart
         -- no higher than 10 pixels below the top edge of the screen,
         -- and no lower than a gap length (90 pixels) from the bottom
@@ -41,6 +42,7 @@ function PlayState:update(dt)
 
         -- reset timer
         self.timer = 0
+        -- num = (math.random(1, 10)) * 5 
     end
 
     -- for every pair of pipes..
@@ -102,8 +104,8 @@ function PlayState:render()
         pair:render()
     end
 
-    -- love.graphics.setFont(flappyFont)
-    love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
+    love.graphics.setFont(flappyFont)
+    love.graphics.print({COLORS,'Score: ' .. tostring(self.score)}, 8, 8)
 
     self.bird:render()
 end

@@ -11,9 +11,9 @@ function TitleScreenState:update(dt)
 end
 
 function TitleScreenState:render()
-    -- love.graphics.setFont(flappyFont)
-    love.graphics.printf('Fifty Bird', 0, 64, WINDOW_WIDTH, 'center')
+    love.graphics.setFont(flappyFont)
+    love.graphics.printf({COLORS,'Flappy Bird'}, 0, 64, WINDOW_WIDTH, 'center')
 
-    -- love.graphics.setFont(mediumFont)
-    love.graphics.printf('Press Enter', 0, 100, WINDOW_WIDTH, 'center')
+    love.graphics.setFont(mediumFont)
+    love.graphics.printf({COLORS,'Press Enter'}, 0, 100, WINDOW_WIDTH, 'center')
 end

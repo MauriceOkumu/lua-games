@@ -12,3 +12,6 @@ Games made with lua
 
  Cd to the game-parent `main.lua` and then run `open -n -a love . `
  [Flappy-bird](https://github.com/games50/fifty-bird)
+
+ Addins colors to text 
+ `printf({{0, 255, 0, 255}, 'Colored text'}, x, y, 'center')`

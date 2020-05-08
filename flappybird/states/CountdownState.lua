@@ -27,6 +27,6 @@ function CountdownState:update(dt)
 end
 
 function CountdownState:render()
-    -- love.graphics.setFont(hugeFont)
-    love.graphics.printf(tostring(self.count), 0, 120, WINDOW_WIDTH, 'center')
+    love.graphics.setFont(hugeFont)
+    love.graphics.printf({COLORS,tostring(self.count)}, 0, 120, WINDOW_WIDTH, 'center')
 end
