@@ -2,6 +2,7 @@
 require 'push'
 Class = require 'class'
 require 'Bird'
+require 'PipePair'
 require 'Pipe'
 
 WINDOW_WIDTH = 1200
@@ -17,14 +18,18 @@ local bg_scroll = 0
 local ground = love.graphics.newImage('fore_ground.png')
 local g_scroll = 1280
 
-local BG_SPEED = 30
+local BG_SPEED = 20
 local G_SPEED = 60
 
 local flappy = Bird()
 local pipe = Pipe()
 
-local pipes = {}
+local pipePairs = {}
 local spawnTimer = 0
+
+local lastY =  math.random(120) - 70
+
+local scrolling = true
 
 local BG_LOOPING_POINT =  - 1200
 
@@ -49,47 +54,68 @@ end
 function love.draw()
     -- push:start()
     
-    -- love.graphics.draw(background, -bg_scroll, 0)
+    love.graphics.draw(background, -bg_scroll, 0)
+    love.graphics.draw(background, -bg_scroll - 1200, 0)
     -- love.graphics.draw(background, -bg_scroll-1100 + WINDOW_WIDTH / 2, 0)
     -- love.graphics.draw(ground, g_scroll+ WINDOW_WIDTH, 550)
-    for k, pipe in pairs(pipes) do
-        pipe:render()
-    end
-    love.graphics.draw(ground, g_scroll , 550)
-    love.graphics.draw(ground, g_scroll + 1200 , 550)
+    -- for k, pipe in pairs(pipes) do
+    --     pipe:render()
+    -- end
     -- flappy:render()
     love.graphics.print('FLAPPY BIRD', 500, 30)
-    if gametime == 'night' then 
-        love.graphics.setColor(0, 255, 0, 255)
-     end
+    -- if gametime == 'night' then 
+    --     love.graphics.setColor(0, 255, 0, 255)
+    --  end
     -- push:finish()
     flappy:render()
     
+    for k, pair in pairs(pipePairs) do
+        pair:render()
+    end
+    love.graphics.draw(ground, g_scroll , 550)
+    love.graphics.draw(ground, g_scroll + 1200 , 550)
+    
 end
+
 
 function love.update(dt)
     -- if love.keyboard.isDown('n') then
     --     gametime = 'night'
     -- end
-    -- bg_scroll = (bg_scroll + BG_SPEED * dt) % BG_LOOPING_POINT
+    bg_scroll = (bg_scroll + BG_SPEED * dt) % BG_LOOPING_POINT
     g_scroll =  (g_scroll - G_SPEED * dt) % BG_LOOPING_POINT
     -- pipe:update(dt)
     spawnTimer = spawnTimer + dt 
     
-    if spawnTimer > 2 then 
-        table.insert(pipes, Pipe())
-        spawnTimer = 0
+    if spawnTimer > 4 then 
+        -- table.insert(pipes, Pipe())
+        -- spawnTimer = 0
+
+        local y = math.max(-PIPE_HEIGHT + 60, 
+                math.min(lastY + math.random(-30, 30), WINDOW_HEIGHT - 190))
+            lastY = y
+            
+            table.insert(pipePairs, PipePair(y))
+            spawnTimer = 0
     end
     flappy:update(dt)
 
-    for k, pipe in pairs(pipes) do 
-        pipe:update(dt)
+    for k, pair in pairs(pipePairs) do 
+        pair:update(dt)
 
-        if pipe.x < -pipe.width then
-            table.remove(pipes, k)
+        -- if pipe.x < -pipe.width then
+        --     table.remove(pipes, k)
+        -- end
+        if pair.x < -PIPE_WIDTH then
+            pair.remove = true
         end
     end
     -- flash out the keys pressed table after every frame
+    for k, pair in pairs(pipePairs) do
+        if pair.remove then
+            table.remove(pipePairs, k)
+        end
+    end
     love.keyboard.KeysPressed = {}
 end
 
