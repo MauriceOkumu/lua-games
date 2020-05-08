@@ -8,9 +8,7 @@ require 'Pipe'
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 700
 
--- USING THE PUSH LIBRARY
-VIRTUAL_WIDTH = 512
-VIRTUAL_HEIGHT = 288
+
 
 local background = love.graphics.newImage('background.jpg')
 local bg_scroll = 0
@@ -82,41 +80,46 @@ function love.update(dt)
     -- if love.keyboard.isDown('n') then
     --     gametime = 'night'
     -- end
-    bg_scroll = (bg_scroll + BG_SPEED * dt) % BG_LOOPING_POINT
-    g_scroll =  (g_scroll - G_SPEED * dt) % BG_LOOPING_POINT
-    -- pipe:update(dt)
-    spawnTimer = spawnTimer + dt 
-    
-    if spawnTimer > 4 then 
-        -- table.insert(pipes, Pipe())
-        -- spawnTimer = 0
+    if scrolling then
+        bg_scroll = (bg_scroll + BG_SPEED * dt) % BG_LOOPING_POINT
+        g_scroll =  (g_scroll - G_SPEED * dt) % BG_LOOPING_POINT
+        -- pipe:update(dt)
+        spawnTimer = spawnTimer + dt 
+        
+        if spawnTimer > 4 then 
+            -- table.insert(pipes, Pipe())
+            -- spawnTimer = 0
 
-        local y = math.max(-PIPE_HEIGHT + 60, 
-                math.min(lastY + math.random(-30, 30), WINDOW_HEIGHT - 190))
-            lastY = y
-            
-            table.insert(pipePairs, PipePair(y))
-            spawnTimer = 0
-    end
-    flappy:update(dt)
-
-    for k, pair in pairs(pipePairs) do 
-        pair:update(dt)
-
-        -- if pipe.x < -pipe.width then
-        --     table.remove(pipes, k)
-        -- end
-        if pair.x < -PIPE_WIDTH then
-            pair.remove = true
+            local y = math.max(-PIPE_HEIGHT + 60, 
+                    math.min(lastY + math.random(-30, 30), WINDOW_HEIGHT - 190))
+                lastY = y
+                
+                table.insert(pipePairs, PipePair(y))
+                spawnTimer = 0
         end
-    end
-    -- flash out the keys pressed table after every frame
-    for k, pair in pairs(pipePairs) do
-        if pair.remove then
-            table.remove(pipePairs, k)
+        flappy:update(dt)
+
+        for k, pair in pairs(pipePairs) do 
+            pair:update(dt)
+
+           for l, pipe in pairs(pair.pipes) do
+            if flappy:collides(pipe) then
+                scrolling = false
+            end
+          end
+
+            if pair.x < -PIPE_WIDTH then
+                pair.remove = true
+            end
         end
+        -- flash out the keys pressed table after every frame
+        for k, pair in pairs(pipePairs) do
+            if pair.remove then
+                table.remove(pipePairs, k)
+            end
+        end
+        love.keyboard.KeysPressed = {}
     end
-    love.keyboard.KeysPressed = {}
 end
 
 function love.keyboard.wasPressed(key)
@@ -126,6 +129,7 @@ function love.keyboard.wasPressed(key)
     else
         return false
     end
+
 end
 
 
