@@ -6,6 +6,10 @@ Games made with lua
 
 [Game programming patterns](https://gameprogrammingpatterns.com/)
 
+[collisions](https://github.com/noooway/love2d_arkanoid_tutorial)
+
+[particles](https://love2d.org/wiki/ParticleSystem)
+
 [free music to add to games](https://freemusicarchive.org/genre/Ambient_Electronic?sort=track_date_published&d=1&page=8)
 
  ### Run a game
@@ -15,3 +19,5 @@ Games made with lua
 
  Addins colors to text 
  `printf({{0, 255, 0, 255}, 'Colored text'}, x, y, 'center')`
+
+`alt + l ` launches love2d in the current directory in vscode
