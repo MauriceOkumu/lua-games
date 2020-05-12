@@ -3,7 +3,7 @@ Spacecraft = Class{}
 function Spacecraft:init()
     self.x = 500
     self.y = 500
-    self.image = love.graphics.newImage('graphics/spacecraft.png')
+    self.image = love.graphics.newImage('graphics/Battleship.png')
     self.width = self.image:getWidth()
     self.height = self.image:getHeight()
    
