@@ -13,7 +13,7 @@ function StartState:update(dt)
 end
 
 function StartState:render()
-    love.graphics.print('Hello from startState', 80, 200)
-    love.graphics.print('Press `enter` or `return` to start the game', 80, 240)
+    love.graphics.setFont(gFonts['large'])
+    love.graphics.printf({COLORS,'Press `enter` or `return` to start the game'},12, 60, WINDOW_WIDTH, 'center')
 end
 

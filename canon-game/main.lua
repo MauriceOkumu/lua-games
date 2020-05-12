@@ -1,10 +1,12 @@
 require 'src/Dependencies'
 
+local background = love.graphics.newImage('graphics/nebula.jpg')
+
 function love.load()
-    love.window.setTitle('Canon Shoot')
+    love.window.setTitle('METEOR SHOOT')
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, { 
         fullscreen = false,
-        resizable = true,
+        resizable = false,
         vsync = true
     })
 
@@ -13,8 +15,15 @@ function love.load()
         ['play'] = function() return PlayState end,
     }
 
+    gFonts = {
+        ['small'] = love.graphics.newFont('fonts/font.ttf', 8),
+        ['medium'] = love.graphics.newFont('fonts/font.ttf', 16),
+        ['large'] = love.graphics.newFont('fonts/flappy.ttf', 32),
+    }
+
     love.keyboard.keysPressed = {}
     gStateMachine:change('start')
+    gGamestate = false
 end
 
 function love.keypressed(key)
@@ -33,8 +42,8 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.printf('CANON GAME', 12, 30, WINDOW_WIDTH, 'center')
-    love.graphics.printf('PRESS ENTER TO START THE GAME', 12, 60, WINDOW_WIDTH, 'center')
+    love.graphics.draw(background, 0, 0)
+    love.graphics.printf('SPACE GAME', 12, 30, WINDOW_WIDTH, 'center')
     gStateMachine:render()
   
 end
