@@ -22,6 +22,16 @@ function love.load()
         ['large'] = love.graphics.newFont('fonts/flappy.ttf', 32),
     }
 
+    gSounds = {
+        ['music'] = love.audio.newSource('sounds/spacegamemusic.mp3', 'static')
+    }
+    gTextures = {
+        ['particle'] = love.graphics.newImage('graphics/particle.png')
+    }
+
+    gSounds['music']:setLooping(true)
+    gSounds['music']:play()
+
     love.keyboard.keysPressed = {}
     gStateMachine:change('start')
     gGamestate = false
