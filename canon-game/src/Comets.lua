@@ -40,10 +40,6 @@ function Comet:update(dt)
 
 end
 
-function Comet:collides()
-    -- self.psystem:emit(64)
-end
-
 function Comet:render()
     love.graphics.draw(image, self.x, self.y)
 end

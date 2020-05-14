@@ -7,17 +7,24 @@ function Spacecraft:init()
     self.width = self.image:getWidth()
     self.height = self.image:getHeight()
     self.damage = 0
-    self.health = 5
-   
+    self.health = 3
+    self.bullet = Bullet(self)
 end
 
 
 function Spacecraft:update(dt)
+    self.bullet:render()
     if gGamestate then
     self.x = self.x + SPACECRAFT_SPEED 
+    if self.bullet.updateBulletX then
+        self.bullet.x = self.x + self.width / 2 + SPACECRAFT_SPEED - 4
+    end
     end
     if gGamestate == false then
         self.x = self.x - SPACECRAFT_SPEED 
+        if self.bullet.updateBulletX then
+          self.bullet.x = self.x + self.width / 2 - SPACECRAFT_SPEED 
+        end
     end
      if self.x < 0 then
         self.x = 0
@@ -26,6 +33,8 @@ function Spacecraft:update(dt)
      if self.x >= WINDOW_WIDTH - self.width then
         self.x = WINDOW_WIDTH - self.width
      end
+     self.bullet:update(dt)
+    
 end
 
 function Spacecraft:reset()
@@ -42,8 +51,15 @@ function Spacecraft:collides(comet)
     end
     return false
 end
- 
+
+ function Spacecraft:hits_comet(comet)
+    if self.bullet:collides(comet) then 
+        SCORE = SCORE + 1
+        return true
+    end
+ end
+
 function Spacecraft:render()
     love.graphics.draw(self.image,self.x, self.y)
-
+     self.bullet:render()
 end

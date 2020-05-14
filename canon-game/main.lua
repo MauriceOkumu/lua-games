@@ -24,7 +24,9 @@ function love.load()
 
     gSounds = {
         ['music'] = love.audio.newSource('sounds/spacegamemusic.mp3', 'static'),
-        ['collision'] = love.audio.newSource('sounds/collision.wav', 'static')
+        ['collision'] = love.audio.newSource('sounds/collision.wav', 'static'),
+        ['laser'] = love.audio.newSource('sounds/laser.wav', 'static'),
+        ['game_ended'] = love.audio.newSource('sounds/game_ended.wav', 'static')
     }
     gTextures = {
         ['particle'] = love.graphics.newImage('graphics/particle.png'),
@@ -58,6 +60,7 @@ end
 function love.draw()
     love.graphics.draw(gTextures['background'], 0, bg_scroll - 770)
     love.graphics.printf('SPACE GAME', 12, 30, WINDOW_WIDTH, 'center')
+    love.graphics.print({{1,.3,.4,1},'SCORE : ' .. SCORE}, 15, 30)
     gStateMachine:render()
   
 end
