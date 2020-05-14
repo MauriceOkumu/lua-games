@@ -14,14 +14,17 @@ function Comet:init()
     self.psystem = love.graphics.newParticleSystem(gTextures['particle'], 64)
     -- lasts between 0.5-2 seconds seconds
     self.psystem:setParticleLifetime(0.5, 2)
-    self.psystem:setColors({math.random(), math.random(), math.random()})
+    self.psystem:setColors({
+        math.random(), math.random(), math.random(), math.random()
+       
+    })
 
      -- give it an acceleration of anywhere between X1,Y1 and X2,Y2 (0, 0) and (80, 80) here
     -- gives generally downward 
     self.psystem:setLinearAcceleration(-15, 0, -15, -80)
 
     -- spread of particles; normal looks more natural than uniform
-    self.psystem:setAreaSpread('normal', 10, 10)
+    self.psystem:setEmissionArea('normal', 10, 10)
     
 end
 

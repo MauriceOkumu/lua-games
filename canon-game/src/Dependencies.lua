@@ -8,4 +8,5 @@ require 'src/Comets'
 require 'states/BaseState'
 require 'states/StartState'
 require 'states/PlayState'
+require 'states/GameoverState'
 

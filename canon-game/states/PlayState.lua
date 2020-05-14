@@ -13,7 +13,10 @@ function PlayState:update(dt)
     
     for k, comet in pairs(self.asteroids) do
         comet:update(dt)
-        
+        if self.spacecraft:collides(comet) then
+            table.remove(self.asteroids, k)
+            gSounds['collision']:play()
+        end
     end
 
     if love.keyboard.wasPressed('escape') then
@@ -25,16 +28,20 @@ function PlayState:update(dt)
     if love.keyboard.wasPressed('left') then
         gGamestate = false
     end
+    if self.spacecraft.health == 0 then
+        gStateMachine:change('gameover')
+        gSounds['music']:stop()
+    end
 end
 
 function PlayState:render()
     love.graphics.setFont(gFonts['large'])  
-    self.spacecraft:render()
     
     for k, comet in pairs(self.asteroids) do
         comet:render()
         comet:renderParticles()
     end
-   
+    self.spacecraft:render()
+    gSounds['music']:play()
     love.graphics.printf({COLORS,'Playing the game'},12, 60, WINDOW_WIDTH, 'center')
 end

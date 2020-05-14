@@ -6,6 +6,8 @@ function Spacecraft:init()
     self.image = love.graphics.newImage('graphics/Battleship.png')
     self.width = self.image:getWidth()
     self.height = self.image:getHeight()
+    self.damage = 0
+    self.health = 5
    
 end
 
@@ -27,11 +29,20 @@ function Spacecraft:update(dt)
 end
 
 function Spacecraft:reset()
+    
 end
 
-function Spacecraft:collides(target)
-end
+function Spacecraft:collides(comet)
+    if self.x + 2 >= comet.x and self.x + 2 <= comet.x + comet.width then
+        if self.y + 2<= comet.y + comet.height - 4 then
+            self.health = self.health - 1
+            return true
+        end
 
+    end
+    return false
+end
+ 
 function Spacecraft:render()
     love.graphics.draw(self.image,self.x, self.y)
 

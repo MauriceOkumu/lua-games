@@ -1,6 +1,5 @@
 require 'src/Dependencies'
 
-local background = love.graphics.newImage('graphics/sta.png')
 local bg_scroll = 0
 
 function love.load()
@@ -14,6 +13,7 @@ function love.load()
     gStateMachine = StateMachine{
         ['start'] = function() return StartState end,
         ['play'] = function() return PlayState end,
+        ['gameover'] = function() return GameoverState end
     }
 
     gFonts = {
@@ -23,10 +23,12 @@ function love.load()
     }
 
     gSounds = {
-        ['music'] = love.audio.newSource('sounds/spacegamemusic.mp3', 'static')
+        ['music'] = love.audio.newSource('sounds/spacegamemusic.mp3', 'static'),
+        ['collision'] = love.audio.newSource('sounds/collision.wav', 'static')
     }
     gTextures = {
-        ['particle'] = love.graphics.newImage('graphics/particle.png')
+        ['particle'] = love.graphics.newImage('graphics/particle.png'),
+        ['background'] = love.graphics.newImage('graphics/sta.png')
     }
 
     gSounds['music']:setLooping(true)
@@ -54,7 +56,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.draw(background, 0, bg_scroll - 770)
+    love.graphics.draw(gTextures['background'], 0, bg_scroll - 770)
     love.graphics.printf('SPACE GAME', 12, 30, WINDOW_WIDTH, 'center')
     gStateMachine:render()
   
