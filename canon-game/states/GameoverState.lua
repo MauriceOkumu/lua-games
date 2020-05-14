@@ -13,5 +13,8 @@ end
 function GameoverState:render()
     gSounds['game_ended']:play()
     gSounds['game_ended']:setLooping(true)
-    love.graphics.printf({COLORS,'Press `enter` to start another game!'},12, 90, WINDOW_WIDTH, 'center')
+    love.graphics.printf({COLORS,'FINAL SCORE :  ',color, SCORE },12, 100, WINDOW_WIDTH, 'center')
+    
+    love.graphics.printf({COLORS,'Press ',color, '`enter`',
+    COLORS,' to start the another game !'},12, 200, WINDOW_WIDTH, 'center')
 end

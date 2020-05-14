@@ -7,7 +7,7 @@ function Comet:init()
     self.width = image:getWidth()
     self.height = image:getHeight()
     self.x = math.random(-40, WINDOW_WIDTH - self.width)
-    self.y = 100
+    self.y = -self.height
     self.dy = 0
 
     -- Particle belongs to comet 

@@ -59,8 +59,8 @@ end
 
 function love.draw()
     love.graphics.draw(gTextures['background'], 0, bg_scroll - 770)
-    love.graphics.printf('SPACE GAME', 12, 30, WINDOW_WIDTH, 'center')
-    love.graphics.print({{1,.3,.4,1},'SCORE : ' .. SCORE}, 15, 30)
+    love.graphics.printf({{1,.5,.2,1},'ASTEROID SHOOT'}, 12, 30, WINDOW_WIDTH, 'center')
     gStateMachine:render()
   
 end
+ 
