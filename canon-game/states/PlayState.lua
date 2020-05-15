@@ -22,6 +22,10 @@ function PlayState:update(dt)
             table.remove(self.asteroids, k)
             gSounds['collision']:play()
         end
+        if comet.y > WINDOW_HEIGHT then
+            table.remove(self.asteroids, k)
+            table.insert(self.asteroids, Comet())
+        end
     end
 
     if love.keyboard.wasPressed('escape') then

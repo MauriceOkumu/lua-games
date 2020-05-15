@@ -9,6 +9,7 @@ function Comet:init()
     self.x = math.random(-40, WINDOW_WIDTH - self.width)
     self.y = -self.height
     self.dy = 0
+    self.hit = false
 
     -- Particle belongs to comet 
     self.psystem = love.graphics.newParticleSystem(gTextures['particle'], 64)
@@ -32,10 +33,10 @@ function Comet:update(dt)
     self.dy = self.dy + (math.random(-1,comet_speed) * dt)
     self.y  = self.y + self.dy
     
-    if self.y > WINDOW_HEIGHT then
-        self.dy = self.dy -1
-        self.y = - 100
-    end
+    -- if self.y > WINDOW_HEIGHT then
+    --     self.dy = self.dy -1
+    --     self.y = - 100
+    -- end
     self.psystem:update(dt)
 
 end
