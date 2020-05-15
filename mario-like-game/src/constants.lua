@@ -1,0 +1,26 @@
+W_WIDTH = 1200
+W_HEIGHT = 700
+V_WIDTH = 256
+V_HEIGHT = 144
+TILE_SIZE = 16
+SKY = 2
+GROUND = 1
+map_width = 20
+map_height = 20
+CAMERA_SCROLL_SPEED = 20
+CHARACTER_WIDTH = 16
+CHARACTER_HEIGHT = 20
+CHARACTER_MOVE_SPEED = 40
+JUMP_VELOCITY = -200
+GRAVITY = 7
+-- number of tiles in each tile set
+TILE_SET_WIDTH = 5
+TILE_SET_HEIGHT = 4
+
+-- number of tile sets in sheet
+TILE_SETS_WIDE = 6
+TILE_SETS_TALL = 10
+
+-- number of topper sets in sheet
+TOPPER_SETS_WIDE = 6
+TOPPER_SETS_TALL = 18
