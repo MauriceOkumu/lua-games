@@ -12,9 +12,11 @@ Games made with lua
 
 [Timer library](https://github.com/airstruck/knife)
 
-[Tilemaps etal](https://opengameart.org)
+[Tilemaps, sprites, etal](https://opengameart.org)
 
 [free music to add to games](https://freemusicarchive.org/genre/Ambient_Electronic?sort=track_date_published&d=1&page=8)
+
+[Make sound effects](https://www.bfxr.net/)
 
  ### Run a game
 
@@ -24,4 +26,3 @@ Games made with lua
  Addins colors to text 
  `printf({{0, 255, 0, 255}, 'Colored text'}, x, y, 'center')`
 
-`alt + l ` launches love2d in the current directory in vscode
