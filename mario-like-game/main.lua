@@ -139,10 +139,10 @@ function love.draw()
         for y = 1, map_height do
             for x =1, map_width do
                 local tile = tiles[y][x]
-                -- love.graphics.draw(gTextures['tile'], 
-                -- quads[tile.id],(x -1 )* TILE_SIZE, (y - 1) * TILE_SIZE)
-                love.graphics.draw(gTextures['other_tiles'],tilesets[tileset][tile.id],
-                (x - 1) * TILE_SIZE, (y - 1) * TILE_SIZE)
+                love.graphics.draw(gTextures['tile'], 
+                quads[tile.id],(x -1 )* TILE_SIZE, (y - 1) * TILE_SIZE)
+                -- love.graphics.draw(gTextures['other_tiles'],tilesets[tileset][tile.id],
+                -- (x - 1) * TILE_SIZE, (y - 1) * TILE_SIZE)
                 if tile.topper then
                     love.graphics.draw(gTextures['toppers'], toppersets[topperset][tile.id], 
                         (x - 1) * TILE_SIZE, (y - 1) * TILE_SIZE)

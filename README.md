@@ -12,11 +12,13 @@ Games made with lua
 
 [Timer library](https://github.com/airstruck/knife)
 
-[Tilemaps, sprites, etal](https://opengameart.org)
+[Tilemaps, sprites, etal](https://opengameart.org) --Artist Kenny for sprite sheets
 
 [free music to add to games](https://freemusicarchive.org/genre/Ambient_Electronic?sort=track_date_published&d=1&page=8)
 
 [Make sound effects](https://www.bfxr.net/)
+
+[Box 2d](https://www.iforce2d.net/b2dtut/introduction)
 
  ### Run a game
 

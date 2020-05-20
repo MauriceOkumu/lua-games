@@ -6,7 +6,7 @@ function Bullet:init(craft)
    self.y = craft.y - self.laser:getHeight()  + 60 
    self.dy = 0
    self.updateBulletX = true
-   self.show_bullet = true
+   self.show_bullet = false
 end
 
 
@@ -16,6 +16,7 @@ function Bullet:update(dt)
         self.dy = self.dy + 600 * dt
         gSounds['laser']:play()
         self.updateBulletX = false
+        self.show_bullet = true
        
      end
      self.y = self.y - self.dy
