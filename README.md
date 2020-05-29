@@ -21,10 +21,9 @@ Games made with lua
 [Box 2d](https://www.iforce2d.net/b2dtut/introduction)
 
  ### Run a game
-
- Cd to the game-parent `main.lua` and then run `open -n -a love . `
+Make sure you have [Love2D](https://github.com/love2d/love) installed in your local.
+ Cd to the game-parent where there is a `main.lua` and then run `open -n -a love . ` in the terminal
  [Flappy-bird](https://github.com/games50/fifty-bird)
 
- Addins colors to text 
- `printf({{0, 255, 0, 255}, 'Colored text'}, x, y, 'center')`
+ 
 
