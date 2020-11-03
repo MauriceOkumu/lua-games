@@ -1,5 +1,6 @@
 # lua-games
 Games made with lua 
+[Install lua locally](https://www.tutorialspoint.com/lua/lua_quick_guide.htm)
 
 ### Readings
 [How to make an RPG](https://howtomakeanrpg.com/)
